@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,16 +30,16 @@ public class MainStore extends JFrame {
 				try {
 					MainStore frame = new MainStore();
 					frame.setVisible(true);
-					Connection conn;
 					try {
-						//Class.forName("com.mysql.cj.jdbc.Driver");
-						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb","root","7202");
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection conn=null;
+						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampledb?serverTimezone=Asia/Seoul","root","7202");
 						conn.close();
+						
+					} catch(ClassNotFoundException e) {
+						System.out.println("JDBC 드라이버 로드 에러");
 					} 
-//						catch(ClassNotFoundException e) {
-//						System.out.println("JDBC 드라이버 로드 에러");
-//					} 
-						catch(Exception e) {
+					catch(SQLException e) {
 						System.out.println("DB연결에러");
 					}
 				} catch (Exception e) {
