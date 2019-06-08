@@ -52,8 +52,8 @@ public class StartFGT extends JFrame {
 			 public void actionPerformed(ActionEvent e) {
 			//넘어가기
 				dispose();
-				MainStore ms = new MainStore();
-				ms.setVisible(true);
+				FindGuitarTester fgt = new FindGuitarTester();
+				fgt.setVisible(true);
 			}
 		});
 		

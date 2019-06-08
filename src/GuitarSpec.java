@@ -2,12 +2,12 @@ public class GuitarSpec {
  
   private Builder builder; 
   private String model;
-  private Type type;
+  private TypeGuitar type;
   private int numStrings;
   private Wood backWood;
   private Wood topWood;
 
-  public GuitarSpec(Builder builder, String model, Type type,
+  public GuitarSpec(Builder builder, String model, TypeGuitar type,
                     int numStrings, Wood backWood, Wood topWood) {
     this.builder = builder;
     this.model = model;
@@ -25,7 +25,7 @@ public class GuitarSpec {
     return model;
   }
 
-  public Type getType() {
+  public TypeGuitar getType() {
     return type;
   }
 
