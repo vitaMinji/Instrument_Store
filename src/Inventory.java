@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
@@ -24,6 +25,14 @@ public class Inventory {
 			Statement stmt = conn.createStatement(); 
 			
 			stmt.executeUpdate(sql);
+//			ResultSet resultSet=null;
+//		    resultSet = stmt.executeQuery("select serialNumber from guitar");//방금 넣은 거! 라는 거 어떻게 하지
+//		    String value = resultSet.getString("serialNumber");
+//		    System.out.println(resultSet);
+			
+			
+			
+			//Guitar guitar = new Guitar(sql);
 			conn.close();
 			
 		} catch(ClassNotFoundException e) {
@@ -32,7 +41,7 @@ public class Inventory {
 		catch(SQLException e) {
 			System.out.println(e);
 		}
-//    Guitar guitar = new Guitar(serialNumber, price, spec);
+	  
 //    guitars.add(guitar);
   }
   
