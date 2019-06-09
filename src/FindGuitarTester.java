@@ -62,20 +62,19 @@ public class FindGuitarTester extends JFrame {
 						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guitar_inventory?serverTimezone=Asia/Seoul","root","7202");
 						Statement stmt = conn.createStatement(); 
 						
-						//inventory.addGuitar(serialNumber, price, spec);
-						
 						stmt.executeUpdate("delete from guitar");
-						stmt.executeUpdate("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('11277', '3999.95', 'Builder.COLLINGS','CJ','TypeGuitar.ELECTRIC','6','Wood.INDIAN_ROSEWOOD','Wood.SITKA');");
-						stmt.executeUpdate("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('V95693', '1499.95', 'Builder.FENDER','Stratocastor','TypeGuitar.ELECTRIC','6','Wood.ALDER', 'Wood.ALDER');");
-						stmt.executeUpdate("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('V9512', '1549.95', 'Builder.FENDER', 'Stratocastor', 'TypeGuitar.ELECTRIC', '6', 'Wood.ALDER', 'Wood.ALDER');");
-						stmt.executeUpdate("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('122784', '5495.95', 'Builder.MARTIN','D-18','TypeGuitar.ACOUSTIC', '6', 'Wood.MAHOGANY', 'Wood.ADIRONDACK');");
-						stmt.executeUpdate("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('76531', '6295.95', 'Builder.MARTIN', 'OM-28','TypeGuitar.ACOUSTIC', '6', 'Wood.BRAZILIAN_ROSEWOOD', 'Wood.ADIRONDACK');");
-						stmt.executeUpdate("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('70108276', '2295.95', 'Builder.GIBSON', 'Les Paul', 'TypeGuitar.ELECTRIC','6', 'Wood.MAHOGANY', 'Wood.MAHOGANY');");
-						stmt.executeUpdate("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('82765501', '1890.95', 'Builder.GIBSON', 'SG 61 Reissue', 'TypeGuitar.ELECTRIC', '6',' Wood.MAHOGANY', 'Wood.MAHOGANY');");
-						stmt.executeUpdate("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('77023', '6275.95', 'Builder.MARTIN', 'D-28', 'TypeGuitar.ACOUSTIC', '6', ' Wood.BRAZILIAN_ROSEWOOD', 'Wood.ADIRONDACK');");
-						stmt.executeUpdate("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('1092', '12995.95', 'Builder.OLSON', 'SJ', 'TypeGuitar.ACOUSTIC', '12', 'Wood.INDIAN_ROSEWOOD', 'Wood.CEDAR');");
-						stmt.executeUpdate("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('566-62', '8999.95', 'Builder.RYAN', 'Cathedral', 'TypeGuitar.ACOUSTIC',' 12', 'Wood.COCOBOLO', 'Wood.CEDAR');");
-						stmt.executeUpdate("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('6 29584', '2100.95', 'Builder.PRS', 'Dave Navarro Signature', 'TypeGuitar.ELECTRIC', '6', 'Wood.MAHOGANY', 'Wood.MAPLE');");
+						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('11277', '3999.95', 'Builder.COLLINGS','CJ','TypeGuitar.ELECTRIC','6','Wood.INDIAN_ROSEWOOD','Wood.SITKA');");
+						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('V95693', '1499.95', 'Builder.FENDER','Stratocastor','TypeGuitar.ELECTRIC','6','Wood.ALDER', 'Wood.ALDER');");
+						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('V9512', '1549.95', 'Builder.FENDER', 'Stratocastor', 'TypeGuitar.ELECTRIC', '6', 'Wood.ALDER', 'Wood.ALDER');");
+						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('122784', '5495.95', 'Builder.MARTIN','D-18','TypeGuitar.ACOUSTIC', '6', 'Wood.MAHOGANY', 'Wood.ADIRONDACK');");
+						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('76531', '6295.95', 'Builder.MARTIN', 'OM-28','TypeGuitar.ACOUSTIC', '6', 'Wood.BRAZILIAN_ROSEWOOD', 'Wood.ADIRONDACK');");
+						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('70108276', '2295.95', 'Builder.GIBSON', 'Les Paul', 'TypeGuitar.ELECTRIC','6', 'Wood.MAHOGANY', 'Wood.MAHOGANY');");
+						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('82765501', '1890.95', 'Builder.GIBSON', 'SG 61 Reissue', 'TypeGuitar.ELECTRIC', '6',' Wood.MAHOGANY', 'Wood.MAHOGANY');");
+						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('77023', '6275.95', 'Builder.MARTIN', 'D-28', 'TypeGuitar.ACOUSTIC', '6', ' Wood.BRAZILIAN_ROSEWOOD', 'Wood.ADIRONDACK');");
+						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('1092', '12995.95', 'Builder.OLSON', 'SJ', 'TypeGuitar.ACOUSTIC', '12', 'Wood.INDIAN_ROSEWOOD', 'Wood.CEDAR');");
+						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('566-62', '8999.95', 'Builder.RYAN', 'Cathedral', 'TypeGuitar.ACOUSTIC',' 12', 'Wood.COCOBOLO', 'Wood.CEDAR');");
+						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('6 29584', '2100.95', 'Builder.PRS', 'Dave Navarro Signature', 'TypeGuitar.ELECTRIC', '6', 'Wood.MAHOGANY', 'Wood.MAPLE');");
+						
 						
 						conn.close();
 						
