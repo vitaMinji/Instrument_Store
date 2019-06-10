@@ -1,6 +1,5 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
@@ -9,15 +8,13 @@ import java.util.List;
 
 public class Inventory {
   private List guitars;
-  
-  
+//  ConnectDB cdb;
 
   public Inventory() {
     guitars = new LinkedList();
   }
 
   public void addGuitar(String sql) {
-	  
 	  try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn=null;
@@ -41,27 +38,20 @@ public class Inventory {
 		catch(SQLException e) {
 			System.out.println(e);
 		}
-	  
-//    guitars.add(guitar);
   }
   
-//쓸모없니?
   
-//  public Guitar getGuitar(String serialNumber) {
-//    for (Iterator i = guitars.iterator(); i.hasNext(); ) {
-//      Guitar guitar = (Guitar)i.next();
-//      if (guitar.getSerialNumber().equals(serialNumber)) {
-//        return guitar;
-//      }
-//    }
-//    return null;
-//  }
-
   public List search(GuitarSpec searchSpec) {
     List matchingGuitars = new LinkedList();
+    
     for (Iterator i = guitars.iterator(); i.hasNext(); ) {
       Guitar guitar = (Guitar)i.next();
-      if (guitar.getSpec().matches(searchSpec))
+//      String sql;//어따써
+//      sql = "SELECT * FROM guitar WHERE " + "builder IN ('" + guitar.getSpec().getBuilder() + "')" + " AND "
+//  			+ "model IN ('" +  guitar.getSpec().getModel() + "')" + " AND " + "type IN ('" +  guitar.getSpec().getType() + "')" + " AND "
+//  			+ "numStrings IN ('" +  guitar.getSpec().getNumStrings() + "')" + " AND " + "backWood IN ('" +  guitar.getSpec().getBackWood()
+//  			+ "')" + " AND " + "topWood IN ('" + guitar.getSpec().getTopWood() + "')";
+//      if (guitar.getSpec().matches(searchSpec))
         matchingGuitars.add(guitar);
     }
     return matchingGuitars;

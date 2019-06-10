@@ -1,15 +1,20 @@
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Guitar {
 
   private String serialNumber;
   private double price;
   GuitarSpec spec;
-
+  ConnectDB cdb;
+  
+  
   public Guitar(String serialNumber, String sql) {
+	cdb.connectDB();
+	Statement stmt = null;
     this.serialNumber = serialNumber;
     ResultSet resultSet;
-    resultSet = stmt.executeQuery("select price from guitar where id='"+serialNumber+"'");
+    
     this.price = price;
     this.spec = spec;
   }

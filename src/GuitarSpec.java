@@ -1,3 +1,10 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
+
 public class GuitarSpec {
  
   private Builder builder; 
@@ -65,20 +72,26 @@ public class GuitarSpec {
 	  this.topWood=topWood;
   }
 
-  public boolean matches(GuitarSpec otherSpec) {
-    if (builder != otherSpec.builder)
-      return false;
-    if ((model != null) && (!model.equals("")) &&
-        (!model.toLowerCase().equals(otherSpec.model.toLowerCase())))
-      return false;
-    if (type != otherSpec.type)
-      return false;
-    if (numStrings != otherSpec.numStrings)
-      return false;
-    if (backWood != otherSpec.backWood)
-      return false;
-    if (topWood != otherSpec.topWood)
-      return false;
-    return true;
+  public List matches() {
+	List matchingGuitars = new LinkedList();
+    String sql;
+    sql = "SELECT * FROM guitar WHERE " + "builder IN ('" + this.getBuilder() + "')" + " AND "
+			+ "model IN ('" + this.getModel() + "')" + " AND " + "type IN ('" + this.getType() + "')" + " AND "
+			+ "numStrings IN ('" + this.getNumStrings() + "')" + " AND " + "backWood IN ('" + this.getBackWood()
+			+ "')" + " AND " + "topWood IN ('" + this.getTopWood() + "')";
+    try {
+    	Class.forName("com.mysql.cj.jdbc.Driver");
+    	Connection conn=null;
+    	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guitar_inventory?serverTimezone=Asia/Seoul","root","7202");
+    	Statement stmt = conn.createStatement(); 
+    				
+    	stmt.executeUpdate(sql);
+    				
+    } catch(ClassNotFoundException e) {
+    	System.out.println("JDBC 드라이버 로드 에러");
+    } catch(SQLException e) {
+    	System.out.println(e);
+    }
+    return matchingGuitars;
   }
 }
