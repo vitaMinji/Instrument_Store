@@ -25,18 +25,17 @@ public class FindGuitarTester extends JFrame {
 
 		private JPanel contentPane;
 		private JTextField textField;
-
+		static Inventory inventory = new Inventory();
 
 		public static void main(String[] args) {
-			
-			//있던거
-		Inventory inventory = new Inventory();
+		//있던거
+		
 		initializeInventory(inventory);
 		}
 			
 		
-			  private static void initializeInventory(Inventory inventory) {
-				  try {
+		private static void initializeInventory(Inventory inventory) {
+			try {
 						Class.forName("com.mysql.cj.jdbc.Driver");
 						Connection conn=null;
 						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guitar_inventory?serverTimezone=Asia/Seoul","root","7202");
@@ -54,9 +53,6 @@ public class FindGuitarTester extends JFrame {
 						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('1092', '12995.95', 'OLSON', 'SJ', 'ACOUSTIC', '12', 'INDIAN_ROSEWOOD', 'CEDAR');");
 						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('566-62', '8999.95', 'RYAN', 'Cathedral', 'ACOUSTIC',' 12', 'COCOBOLO', 'CEDAR');");
 						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('6 29584', '2100.95', 'PRS', 'Dave Navarro Signature', 'ELECTRIC', '6', 'MAHOGANY', 'MAPLE');");
-						
-						
-						conn.close();
 						
 					} catch(ClassNotFoundException e) {
 						System.out.println("JDBC 드라이버 로드 에러");
@@ -79,13 +75,7 @@ public class FindGuitarTester extends JFrame {
 			});
 		}
 
-		/**
-		 * Create the frame.
-		 */
-			  
-			  
-			  
-			  
+	  
 	    //GUI
 		public FindGuitarTester() {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -152,14 +142,13 @@ public class FindGuitarTester extends JFrame {
 			textField.setColumns(10);
 			
 			JComboBox modelJCB = new JComboBox();
-			modelJCB.setModel(new DefaultComboBoxModel(Type.values()));
+			modelJCB.setModel(new DefaultComboBoxModel(TypeGuitar.values()));
 			
 			
 			modelJCB.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					
 					costumerLikes.setModel(modelJCB.getSelectedItem().toString());
-					//search 메소드에 바로 보내버리자.
 				}
 			});
 			
@@ -171,7 +160,7 @@ public class FindGuitarTester extends JFrame {
 			
 			
 			numStringJCB.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e) {//문제있는듯
+				public void actionPerformed(ActionEvent e) {
 					costumerLikes.setNumStrings(Integer.valueOf(numStringJCB.getSelectedItem().toString()));
 				}
 			});
@@ -210,7 +199,7 @@ public class FindGuitarTester extends JFrame {
 			
 			
 			//검색 버튼 눌렀을때
-			Inventory inventory = new Inventory();
+			
 			searchBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					
@@ -218,7 +207,7 @@ public class FindGuitarTester extends JFrame {
 				
 					if (!matchingGuitars.isEmpty()) {
 					System.out.println("Erin, you might like these guitars:");
-					for (Iterator i = matchingGuitars.iterator(); i.hasNext(); ) {
+					for (Iterator i = matchingGuitars.iterator(); i.hasNext();){
 					Guitar guitar = (Guitar)i.next();
 					GuitarSpec spec = guitar.getSpec();
 						        System.out.println("  We have a " +
@@ -240,40 +229,27 @@ public class FindGuitarTester extends JFrame {
 			panel_1.setVisible(false);
 			contentPane.add(panel);
 			
-			JButton btnNewButton = new JButton("View all instrument");
-			btnNewButton.setBounds(292, 176, 148, 43);
-			contentPane.add(btnNewButton);
+			JButton viewAllbtn = new JButton("View all instrument");
+			viewAllbtn.setBounds(292, 176, 148, 43);
+			contentPane.add(viewAllbtn);
 			
 			JButton btnNewButton_1 = new JButton("Search instrument");
 			btnNewButton_1.setBounds(292, 243, 148, 43);
 			contentPane.add(btnNewButton_1);
 			
-			btnNewButton.addActionListener(new ActionListener() {
+			viewAllbtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					panel.setVisible(true);
-					btnNewButton.setVisible(false);
+					viewAllbtn.setVisible(false);
 					btnNewButton_1.setVisible(false);
-					try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection conn=null;
-						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guitar_inventory?serverTimezone=Asia/Seoul","root","7202");
-						Statement stmt = conn.createStatement(); 
-						ResultSet rs = stmt.executeQuery("select * from guitar");
-						conn.close();
-						
-					} catch(ClassNotFoundException e) {
-						System.out.println("JDBC 드라이버 로드 에러");
-					} 
-					catch(SQLException e) {
-						System.out.println("DB연결에러");
-					}
+					
 				}
 			});
 			
 			btnNewButton_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					panel_1.setVisible(true);
-					btnNewButton.setVisible(false);
+					viewAllbtn.setVisible(false);
 					btnNewButton_1.setVisible(false);
 				}
 			});

@@ -6,15 +6,15 @@ public class Guitar {
   private String serialNumber;
   private double price;
   GuitarSpec spec;
-  ConnectDB cdb;
+  Inventory inventory = new Inventory();
   
   
   public Guitar(String serialNumber, String sql) {
-	cdb.connectDB();
+	
 	Statement stmt = null;
     this.serialNumber = serialNumber;
     ResultSet resultSet;
-    
+    //
     this.price = price;
     this.spec = spec;
   }

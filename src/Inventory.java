@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
@@ -7,30 +8,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Inventory {
-  private List guitars;
-//  ConnectDB cdb;
+  
+  //추가한것
+  private Connection conn;
+  private Statement stmt;
+  private ResultSet rs;
 
   public Inventory() {
-    guitars = new LinkedList();
-  }
-
-  public void addGuitar(String sql) {
 	  try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn=null;
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guitar_inventory?serverTimezone=Asia/Seoul","root","7202");
-			Statement stmt = conn.createStatement(); 
-			
-			stmt.executeUpdate(sql);
-//			ResultSet resultSet=null;
-//		    resultSet = stmt.executeQuery("select serialNumber from guitar");//방금 넣은 거! 라는 거 어떻게 하지
-//		    String value = resultSet.getString("serialNumber");
-//		    System.out.println(resultSet);
-			
-			
-			
-			//Guitar guitar = new Guitar(sql);
-			conn.close();
+			stmt = conn.createStatement(); 
 			
 		} catch(ClassNotFoundException e) {
 			System.out.println("JDBC 드라이버 로드 에러");
@@ -39,21 +27,41 @@ public class Inventory {
 			System.out.println(e);
 		}
   }
+
+  public void addGuitar(String sql) {
+	  try {
+			stmt.executeUpdate(sql);	
+		}
+		catch(SQLException e) {
+			System.out.println(e);
+		}
+  }
   
   
   public List search(GuitarSpec searchSpec) {
     List matchingGuitars = new LinkedList();
-    
-    for (Iterator i = guitars.iterator(); i.hasNext(); ) {
-      Guitar guitar = (Guitar)i.next();
-//      String sql;//어따써
-//      sql = "SELECT * FROM guitar WHERE " + "builder IN ('" + guitar.getSpec().getBuilder() + "')" + " AND "
-//  			+ "model IN ('" +  guitar.getSpec().getModel() + "')" + " AND " + "type IN ('" +  guitar.getSpec().getType() + "')" + " AND "
-//  			+ "numStrings IN ('" +  guitar.getSpec().getNumStrings() + "')" + " AND " + "backWood IN ('" +  guitar.getSpec().getBackWood()
-//  			+ "')" + " AND " + "topWood IN ('" + guitar.getSpec().getTopWood() + "')";
-//      if (guitar.getSpec().matches(searchSpec))
-        matchingGuitars.add(guitar);
-    }
+    //count 사용하자
+      try {
+    	  String sql;//어따써
+    	  sql = "SELECT * FROM guitar WHERE " + "builder IN ('" + searchSpec.getBuilder() + "')" + " AND "
+    			+ "model IN ('" + searchSpec.getModel() + "')" + " AND " + "type IN ('" +  searchSpec.getType() + "')" + " AND "
+    			+ "numString IN ('" +  searchSpec.getNumStrings() + "')" + " AND " + "backWood IN ('" +  searchSpec.getBackWood()
+    			+ "')" + " AND " + "topWood IN ('" +searchSpec.getTopWood() + "')";
+    	  
+    	  rs = stmt.executeQuery(sql);
+    	  boolean hasNext;
+    	  
+    	  while(rs.next()) {
+    		      matchingGuitars.add(rs);
+    	  }
+    	  
+			
+		}
+		catch(SQLException e) {
+			System.out.println(e);
+		}
+
+
     return matchingGuitars;
   }
 }
