@@ -14,4 +14,16 @@ public enum Builder {
       default:       return "Unspecified";
     }
   }
+  
+  static private String tempText;
+  
+  public static Builder toEnum(String text) {
+      for (Builder b : Builder.values()) {
+    	  tempText=b.toString();
+          if (b.tempText.equalsIgnoreCase(text)) {
+              return b;
+          }
+      }
+      return null;
+  }
 }

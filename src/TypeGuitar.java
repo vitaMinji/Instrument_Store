@@ -9,4 +9,16 @@ public enum TypeGuitar {
       default:       return "unspecified";
     }
   }
+  
+static private String tempText;
+  
+  public static TypeGuitar toEnum(String text) {
+      for (TypeGuitar b : TypeGuitar.values()) {
+    	  tempText=b.toString();
+          if (b.tempText.equalsIgnoreCase(text)) {
+              return b;
+          }
+      }
+      return null;
+  }
 }

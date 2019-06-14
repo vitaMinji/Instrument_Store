@@ -124,8 +124,13 @@ public class FindGuitarTester extends JFrame {
 			JComboBox builderJCB = new JComboBox();
 			builderJCB.setModel(new DefaultComboBoxModel(Builder.values()));
 			
+			
+			
+			
 			GuitarSpec costumerLikes=new GuitarSpec(Builder.FENDER, "Stratocastor", 
                     TypeGuitar.ELECTRIC, 6, Wood.ALDER, Wood.ALDER); //대충 초기화.
+			
+			
 			
 			builderJCB.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {

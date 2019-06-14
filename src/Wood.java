@@ -2,6 +2,7 @@ public enum Wood {
 
   INDIAN_ROSEWOOD, BRAZILIAN_ROSEWOOD, MAHOGANY, MAPLE,
   COCOBOLO, CEDAR, ADIRONDACK, ALDER, SITKA;
+	
 
   public String toString() {
     switch(this) {
@@ -16,5 +17,17 @@ public enum Wood {
       case SITKA:              return "Sitka";
       default:  return "unspecified";
     }
+  }
+  
+  static private String tempText;
+  
+  public static Wood toEnum(String text) {
+      for (Wood b : Wood.values()) {
+    	  tempText=b.toString();
+          if (b.tempText.equalsIgnoreCase(text)) {
+              return b;
+          }
+      }
+      return null;
   }
 }

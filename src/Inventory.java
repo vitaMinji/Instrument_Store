@@ -3,7 +3,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,6 +27,8 @@ public class Inventory {
 		}
   }
 
+  
+  
   public void addGuitar(String sql) {
 	  try {
 			stmt.executeUpdate(sql);	
@@ -37,10 +38,10 @@ public class Inventory {
 		}
   }
   
-  
+ 
   public List search(GuitarSpec searchSpec) {
     List matchingGuitars = new LinkedList();
-    //count 사용하자
+
       try {
     	  String sql;//어따써
     	  sql = "SELECT * FROM guitar WHERE " + "builder IN ('" + searchSpec.getBuilder() + "')" + " AND "
@@ -49,13 +50,28 @@ public class Inventory {
     			+ "')" + " AND " + "topWood IN ('" +searchSpec.getTopWood() + "')";
     	  
     	  rs = stmt.executeQuery(sql);
-    	  boolean hasNext;
-    	  
+
+
     	  while(rs.next()) {
-    		      matchingGuitars.add(rs);
+    		  Wood tempBackWood=null;
+    		  tempBackWood = tempBackWood.toEnum(rs.getString("backWood"));
+    		  Wood tempTopWood=null;
+    		  tempTopWood = tempTopWood.toEnum(rs.getString("topWood"));
+    		  
+    		  Builder tempBuilder=null;
+    		  tempBuilder = tempBuilder.toEnum(rs.getString("builder") );
+    		  
+    		  TypeGuitar tempType=null;
+    		  tempType = tempType.toEnum(rs.getString("type") );
+    		  
+    		  
+    		  Guitar gu = new Guitar(rs.getString("serialNumber"),rs.getInt("price"),
+    				  new GuitarSpec(tempBuilder ,rs.getString("model")  ,tempType, rs.getInt("numString"), tempBackWood, tempTopWood));
+    		
+    				  matchingGuitars.add(gu);
+    		  
     	  }
-    	  
-			
+
 		}
 		catch(SQLException e) {
 			System.out.println(e);
