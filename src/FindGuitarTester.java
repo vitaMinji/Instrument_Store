@@ -28,39 +28,24 @@ public class FindGuitarTester extends JFrame {
 		static Inventory inventory = new Inventory();
 
 		public static void main(String[] args) {
-		//있던거
-		
+		inventory.addGuitar("delete from guitar");
 		initializeInventory(inventory);
 		}
 			
-		
 		private static void initializeInventory(Inventory inventory) {
-			try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection conn=null;
-						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guitar_inventory?serverTimezone=Asia/Seoul","root","7202");
-						Statement stmt = conn.createStatement(); 
+		
+			inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('11277', '3999.95', 'COLLINGS','CJ','ELECTRIC','6','INDIAN_ROSEWOOD','SITKA');");
+			inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('V95693', '1499.95', 'FENDER','Stratocastor','ELECTRIC','6','ALDER', 'ALDER');");
+			inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('V9512', '1549.95', 'FENDER', 'Stratocastor', 'ELECTRIC', '6', 'ALDER', 'ALDER');");
+			inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('122784', '5495.95', 'MARTIN','D-18','ACOUSTIC', '6', 'MAHOGANY', 'ADIRONDACK');");
+			inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('76531', '6295.95', 'MARTIN', 'OM-28','ACOUSTIC', '6', 'BRAZILIAN_ROSEWOOD', 'ADIRONDACK');");
+			inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('70108276', '2295.95', 'GIBSON', 'Les Paul', 'ELECTRIC','6', 'MAHOGANY', 'MAHOGANY');");
+			inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('82765501', '1890.95', 'GIBSON', 'SG 61 Reissue', 'ELECTRIC', '6',' MAHOGANY', 'MAHOGANY');");
+			inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('77023', '6275.95', 'MARTIN', 'D-28', 'ACOUSTIC', '6', 'BRAZILIAN_ROSEWOOD', 'ADIRONDACK');");
+			inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('1092', '12995.95', 'OLSON', 'SJ', 'ACOUSTIC', '12', 'INDIAN_ROSEWOOD', 'CEDAR');");
+			inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('566-62', '8999.95', 'RYAN', 'Cathedral', 'ACOUSTIC',' 12', 'COCOBOLO', 'CEDAR');");
+			inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('6 29584', '2100.95', 'PRS', 'Dave Navarro Signature', 'ELECTRIC', '6', 'MAHOGANY', 'MAPLE');");
 						
-						stmt.executeUpdate("delete from guitar");
-						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('11277', '3999.95', 'COLLINGS','CJ','ELECTRIC','6','INDIAN_ROSEWOOD','SITKA');");
-						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('V95693', '1499.95', 'FENDER','Stratocastor','ELECTRIC','6','ALDER', 'ALDER');");
-						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('V9512', '1549.95', 'FENDER', 'Stratocastor', 'ELECTRIC', '6', 'ALDER', 'ALDER');");
-						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('122784', '5495.95', 'MARTIN','D-18','ACOUSTIC', '6', 'MAHOGANY', 'ADIRONDACK');");
-						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('76531', '6295.95', 'MARTIN', 'OM-28','ACOUSTIC', '6', 'BRAZILIAN_ROSEWOOD', 'ADIRONDACK');");
-						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('70108276', '2295.95', 'GIBSON', 'Les Paul', 'ELECTRIC','6', 'MAHOGANY', 'MAHOGANY');");
-						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('82765501', '1890.95', 'GIBSON', 'SG 61 Reissue', 'ELECTRIC', '6',' MAHOGANY', 'MAHOGANY');");
-						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('77023', '6275.95', 'MARTIN', 'D-28', 'ACOUSTIC', '6', 'BRAZILIAN_ROSEWOOD', 'ADIRONDACK');");
-						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('1092', '12995.95', 'OLSON', 'SJ', 'ACOUSTIC', '12', 'INDIAN_ROSEWOOD', 'CEDAR');");
-						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('566-62', '8999.95', 'RYAN', 'Cathedral', 'ACOUSTIC',' 12', 'COCOBOLO', 'CEDAR');");
-						inventory.addGuitar("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('6 29584', '2100.95', 'PRS', 'Dave Navarro Signature', 'ELECTRIC', '6', 'MAHOGANY', 'MAPLE');");
-						
-					} catch(ClassNotFoundException e) {
-						System.out.println("JDBC 드라이버 로드 에러");
-					} 
-					catch(SQLException e) {
-						System.out.println(e);
-					}
-			  
 				  			
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
@@ -78,6 +63,8 @@ public class FindGuitarTester extends JFrame {
 	  
 	    //GUI
 		public FindGuitarTester() {
+			
+			
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 746, 470);
 			contentPane = new JPanel();
@@ -121,44 +108,45 @@ public class FindGuitarTester extends JFrame {
 			lblTopwood.setBounds(77, 276, 57, 15);
 			panel_1.add(lblTopwood);
 			
+			
+			//고객이 원하는 제품 
+			GuitarSpec costumerLikes=new GuitarSpec(Builder.FENDER, " ", 
+                    TypeGuitar.ACOUSTIC, 6, Wood.INDIAN_ROSEWOOD, Wood.INDIAN_ROSEWOOD); 
+			
+			
+			
 			JComboBox builderJCB = new JComboBox();
 			builderJCB.setModel(new DefaultComboBoxModel(Builder.values()));
-			
-			
-			
-			
-			GuitarSpec costumerLikes=new GuitarSpec(Builder.FENDER, "Stratocastor", 
-                    TypeGuitar.ELECTRIC, 6, Wood.ALDER, Wood.ALDER); //대충 초기화.
-			
-			
-			
+		
 			builderJCB.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
+					//model 초기화
 					costumerLikes.setBuilder((Builder) builderJCB.getSelectedItem());
-					//search 메소드에 바로 보내버리자.
 				}
 			});
+			
 			builderJCB.setBounds(218, 65, 101, 21);
 			panel_1.add(builderJCB);
 			
-			textField = new JTextField();
-			textField.setBounds(218, 107, 101, 21);
-			panel_1.add(textField);
-			textField.setColumns(10);
-			
-			JComboBox modelJCB = new JComboBox();
-			modelJCB.setModel(new DefaultComboBoxModel(TypeGuitar.values()));
+			JTextField modelText = new JTextField();
+			modelText.setBounds(218, 107, 101, 21);
+			panel_1.add(modelText);
+			modelText.setColumns(10);
 			
 			
-			modelJCB.addActionListener(new ActionListener(){
+			JComboBox typeJCB = new JComboBox();
+			typeJCB.setModel(new DefaultComboBoxModel(TypeGuitar.values()));
+			
+			
+			typeJCB.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					
-					costumerLikes.setModel(modelJCB.getSelectedItem().toString());
+					costumerLikes.setModel(typeJCB.getSelectedItem().toString());
 				}
 			});
 			
-			modelJCB.setBounds(218, 153, 101, 21);
-			panel_1.add(modelJCB);
+			typeJCB.setBounds(218, 153, 101, 21);
+			panel_1.add(typeJCB);
 			
 			JComboBox numStringJCB = new JComboBox();
 			numStringJCB.setModel(new DefaultComboBoxModel(new String[] {"6", "12"}));
@@ -208,6 +196,7 @@ public class FindGuitarTester extends JFrame {
 			searchBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					
+					costumerLikes.setModel(modelText.getText());
 					List matchingGuitars = inventory.search(costumerLikes);
 				
 					if (!matchingGuitars.isEmpty()) {

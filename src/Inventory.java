@@ -43,13 +43,15 @@ public class Inventory {
     List matchingGuitars = new LinkedList();
 
       try {
-    	  String sql;//어따써
-    	  sql = "SELECT * FROM guitar WHERE " + "builder IN ('" + searchSpec.getBuilder() + "')" + " AND "
-    			+ "model IN ('" + searchSpec.getModel() + "')" + " AND " + "type IN ('" +  searchSpec.getType() + "')" + " AND "
-    			+ "numString IN ('" +  searchSpec.getNumStrings() + "')" + " AND " + "backWood IN ('" +  searchSpec.getBackWood()
-    			+ "')" + " AND " + "topWood IN ('" +searchSpec.getTopWood() + "')";
-    	  
+    	  String sql;
+    	  //ELECTRIC이 문제임 왜지
+    	  sql = "SELECT * FROM guitar WHERE builder = '" + searchSpec.getBuilder() + "'  AND type ='" +  searchSpec.getType()+"'";
+//    	  		+ " AND model ='" + searchSpec.getModel() 
+//    	  		+ "'  AND type ='" +  searchSpec.getType() + "' AND numString ='" +  searchSpec.getNumStrings() + "' AND backWood ='" +  searchSpec.getBackWood()
+//    			+ "' AND topWood ='" +searchSpec.getTopWood() + "'";
+//    	  
     	  rs = stmt.executeQuery(sql);
+    	  System.out.println(rs.toString());
 
 
     	  while(rs.next()) {
@@ -62,13 +64,13 @@ public class Inventory {
     		  tempBuilder = tempBuilder.toEnum(rs.getString("builder") );
     		  
     		  TypeGuitar tempType=null;
-    		  tempType = tempType.toEnum(rs.getString("type") );
+    		  tempType = tempType.toEnum(rs.getString("type"));
     		  
     		  
     		  Guitar gu = new Guitar(rs.getString("serialNumber"),rs.getInt("price"),
     				  new GuitarSpec(tempBuilder ,rs.getString("model")  ,tempType, rs.getInt("numString"), tempBackWood, tempTopWood));
     		
-    				  matchingGuitars.add(gu);
+    		  matchingGuitars.add(gu);
     		  
     	  }
 
