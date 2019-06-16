@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 
 
 public class FindGuitarTester extends JFrame {
@@ -84,6 +85,35 @@ public class FindGuitarTester extends JFrame {
 			panel_1.setBackground(new Color(210, 180, 140));
 			panel_1.setLayout(null);
 			
+			JPanel ifNoGuitar = new JPanel();
+			ifNoGuitar.setBounds(0, 0, 706, 411);
+			ifNoGuitar.setVisible(false);
+			
+			JPanel ifYesGuitar = new JPanel();
+			ifYesGuitar.setBounds(0, 0, 706, 411);
+			ifYesGuitar.setVisible(false);
+			panel_1.add(ifYesGuitar);
+			ifYesGuitar.setBackground(Color.ORANGE);
+			ifYesGuitar.setLayout(null);
+			
+			JLabel lblNewLabel_4 = new JLabel("New label");
+			lblNewLabel_4.setIcon(new ImageIcon(FindGuitarTester.class.getResource("/res/yes.png")));
+			lblNewLabel_4.setBounds(12, 37, 247, 364);
+			ifYesGuitar.add(lblNewLabel_4);
+			panel_1.add(ifNoGuitar);
+			ifNoGuitar.setBackground(Color.PINK);
+			ifNoGuitar.setLayout(null);
+			
+			JLabel lblNewLabel_2 = new JLabel("Sorry! we don't have nothing for you");
+			lblNewLabel_2.setIcon(new ImageIcon(FindGuitarTester.class.getResource("/res/sorry.png")));
+			lblNewLabel_2.setBounds(-295, -57, 839, 677);
+			ifNoGuitar.add(lblNewLabel_2);
+			
+			JLabel lblNewLabel_3 = new JLabel("Sorry! we have nothing for you!");
+			lblNewLabel_3.setFont(new Font("±¼¸²", Font.BOLD, 16));
+			lblNewLabel_3.setBounds(366, 163, 265, 48);
+			ifNoGuitar.add(lblNewLabel_3);
+			
 			JLabel lblSerialNumber = new JLabel("builder");
 			lblSerialNumber.setBounds(77, 68, 101, 15);
 			panel_1.add(lblSerialNumber);
@@ -141,7 +171,7 @@ public class FindGuitarTester extends JFrame {
 			typeJCB.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					
-					costumerLikes.setModel(typeJCB.getSelectedItem().toString());
+					costumerLikes.setType((TypeGuitar) typeJCB.getSelectedItem());
 				}
 			});
 			
@@ -212,7 +242,8 @@ public class FindGuitarTester extends JFrame {
 						          guitar.getPrice() + "!\n  ----");
 						      }
 						    } else {
-						      System.out.println("Sorry, Erin, we have nothing for you.");
+						      ifNoGuitar.setVisible(true);
+//						      searchBtn.setVisible(false);
 						    }
 					
 				}

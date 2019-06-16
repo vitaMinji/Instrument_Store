@@ -45,13 +45,13 @@ public class Inventory {
       try {
     	  String sql;
     	  //ELECTRIC이 문제임 왜지
-    	  sql = "SELECT * FROM guitar WHERE builder = '" + searchSpec.getBuilder() + "'  AND type ='" +  searchSpec.getType()+"'";
-//    	  		+ " AND model ='" + searchSpec.getModel() 
-//    	  		+ "'  AND type ='" +  searchSpec.getType() + "' AND numString ='" +  searchSpec.getNumStrings() + "' AND backWood ='" +  searchSpec.getBackWood()
-//    			+ "' AND topWood ='" +searchSpec.getTopWood() + "'";
-//    	  
+    	
+    	  sql = "SELECT * FROM guitar WHERE builder = '" + searchSpec.getBuilder() + "'  AND type ='" +  searchSpec.getType()+"'AND model ='" + searchSpec.getModel() 
+    	  		+"'  AND type ='" +  searchSpec.getType() + "' AND numString ='" +  searchSpec.getNumStrings() + "' AND backWood ='" +  searchSpec.getBackWood()
+    			+ "' AND topWood ='" +searchSpec.getTopWood() + "'";
+    	  
     	  rs = stmt.executeQuery(sql);
-    	  System.out.println(rs.toString());
+    
 
 
     	  while(rs.next()) {
