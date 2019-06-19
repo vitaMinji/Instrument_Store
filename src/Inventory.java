@@ -38,6 +38,20 @@ public class Inventory {
 		}
   }
   
+  public void deleteSearch(String serialNumber, int price) {
+	  
+	  try {
+		  
+		  String sql;
+		  sql = " delete from guitar WHERE serialNumber = '" + serialNumber +"' AND price = '"+ price +"'";
+		  
+		  stmt.executeUpdate(sql);
+		  
+	  }catch(SQLException e) {
+			System.out.println(e);
+	  }
+  }
+  
  
   public List search(GuitarSpec searchSpec) {
     List matchingGuitars = new LinkedList();

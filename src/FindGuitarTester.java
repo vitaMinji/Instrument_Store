@@ -20,6 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import java.awt.SystemColor;
 
 
 public class FindGuitarTester extends JFrame {
@@ -27,6 +30,11 @@ public class FindGuitarTester extends JFrame {
 		private JPanel contentPane;
 		private JTextField textField;
 		static Inventory inventory = new Inventory();
+		private JTable table;
+		private JTable table_1;
+		private JTextField textField_1;
+		private JTextField serialNumberText;
+		private JTextField priceText;
 
 		public static void main(String[] args) {
 		inventory.addGuitar("delete from guitar");
@@ -65,7 +73,7 @@ public class FindGuitarTester extends JFrame {
 	    //GUI
 		public FindGuitarTester() {
 			
-			
+			//맨 처음 add OR delete 버튼과 search 버튼이 있는 화면 구성
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 746, 470);
 			contentPane = new JPanel();
@@ -73,11 +81,6 @@ public class FindGuitarTester extends JFrame {
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
-			
-			JPanel panel = new JPanel();
-			panel.setBackground(new Color(250, 235, 215));
-			panel.setBounds(12, 10, 706, 411);
-			panel.setVisible(false);
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setBounds(12, 10, 706, 411);
@@ -92,6 +95,160 @@ public class FindGuitarTester extends JFrame {
 			JPanel ifYesGuitar = new JPanel();
 			ifYesGuitar.setBounds(0, 0, 706, 411);
 			ifYesGuitar.setVisible(false);
+			
+			GuitarSpec adminLikes=new GuitarSpec(Builder.FENDER, " ", 
+                    TypeGuitar.ACOUSTIC, 6, Wood.INDIAN_ROSEWOOD, Wood.INDIAN_ROSEWOOD); 
+			
+			
+			//add or delete 버튼을 눌렀을 때
+			JPanel panel = new JPanel();
+			panel.setBounds(0, 0, 706, 411);
+			panel_1.add(panel);
+			panel.setBackground(new Color(250, 235, 215));
+			panel.setLayout(null);
+			
+			JComboBox builderComboBox = new JComboBox();
+			builderComboBox.setModel(new DefaultComboBoxModel(Builder.values()));
+			builderComboBox.setBounds(166, 77, 99, 21);
+			panel.add(builderComboBox);
+			
+			builderComboBox.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					//model 초기화
+					adminLikes.setBuilder((Builder) builderComboBox.getSelectedItem());
+				}
+			});
+			
+			textField_1 = new JTextField();
+			textField_1.setBounds(165, 120, 129, 21);
+			panel.add(textField_1);
+			textField_1.setColumns(10);
+			
+			JComboBox typeComboBox = new JComboBox();
+			typeComboBox.setModel(new DefaultComboBoxModel(TypeGuitar.values()));
+			typeComboBox.setBounds(166, 167, 99, 21);
+			panel.add(typeComboBox);
+			
+			typeComboBox.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					//model 초기화
+					adminLikes.setType((TypeGuitar) typeComboBox.getSelectedItem());
+				}
+			});
+			
+			JComboBox numComboBox = new JComboBox();
+			numComboBox.setModel(new DefaultComboBoxModel(new String[] {"6", "12"}));
+			
+			numComboBox.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					//model 초기화
+					adminLikes.setNumStrings(Integer.valueOf(numComboBox.getSelectedItem().toString()));
+				}
+			});
+			
+			numComboBox.setBounds(166, 211, 99, 21);
+			panel.add(numComboBox);
+			
+			
+			JComboBox backWoodBox = new JComboBox();
+			backWoodBox.setModel(new DefaultComboBoxModel(Wood.values()));
+			backWoodBox.setBounds(166, 254, 128, 21);
+			panel.add(backWoodBox);
+			
+			backWoodBox.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					//model 초기화
+					adminLikes.setBackWood((Wood) builderComboBox.getSelectedItem());
+				}
+			});
+			
+			JComboBox topWoodBox = new JComboBox();
+			topWoodBox.setModel(new DefaultComboBoxModel(Wood.values()));
+			topWoodBox.setBounds(165, 297, 129, 21);
+			panel.add(topWoodBox);
+			
+			builderComboBox.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					//model 초기화
+					adminLikes.setBuilder((Builder) builderComboBox.getSelectedItem());
+				}
+			});
+			
+			JLabel lblSerialnumber = new JLabel("SerialNumber");
+			lblSerialnumber.setBounds(350, 80, 83, 15);
+			panel.add(lblSerialnumber);
+			
+			serialNumberText = new JTextField();
+			serialNumberText.setBounds(452, 77, 116, 21);
+			panel.add(serialNumberText);
+			serialNumberText.setColumns(10);
+			
+			JLabel lblPrice_1 = new JLabel("Price");
+			lblPrice_1.setBounds(350, 123, 57, 15);
+			panel.add(lblPrice_1);
+			
+			priceText = new JTextField();
+			priceText.setBounds(452, 120, 116, 21);
+			panel.add(priceText);
+			priceText.setColumns(10);
+			
+			
+			//add Guitar
+			JButton addGuitarBtn = new JButton("Add Guitar");
+			addGuitarBtn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					adminLikes.setModel(textField_1.getText());
+					System.out.println(builderComboBox.getSelectedItem().toString());
+//					//("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('11277', '3999.95', 'COLLINGS','CJ','ELECTRIC','6','INDIAN_ROSEWOOD','SITKA');")
+//					String sql = "insert into guitar  (serialNumber, price, builder, model, type, numString, backWood, topWood) values('" + serialNumberText.getText()+"','"+Integer.parseInt(priceText.getText())+
+//							"','"+ builderComboBox.getSelectedItem()+"','"+;
+//					inventory.addGuitar(sql);
+				}
+			});
+			
+			
+			addGuitarBtn.setBounds(440, 241, 128, 34);
+			panel.add(addGuitarBtn);
+			
+			
+			//delete Guitar
+			JButton deleteGuitarBtn = new JButton("Delete Guitar");
+			deleteGuitarBtn.setBounds(440, 290, 128, 34);
+			panel.add(deleteGuitarBtn);
+			deleteGuitarBtn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					//delete 할 것
+					inventory.deleteSearch(serialNumberText.getText(), Integer.parseInt(priceText.getText()));
+				}
+			});
+			
+			
+			JLabel lblBuilder = new JLabel("Builder");
+			lblBuilder.setBounds(52, 80, 57, 15);
+			panel.add(lblBuilder);
+			
+			JLabel lblModel = new JLabel("Model");
+			lblModel.setBounds(52, 123, 57, 15);
+			panel.add(lblModel);
+			
+			JLabel lblType_1 = new JLabel("Type");
+			lblType_1.setBounds(52, 170, 57, 15);
+			panel.add(lblType_1);
+			
+			JLabel lblString = new JLabel("String");
+			lblString.setBounds(52, 214, 57, 15);
+			panel.add(lblString);
+			
+			JLabel lblBackwood_1 = new JLabel("BackWood");
+			lblBackwood_1.setBounds(52, 257, 76, 15);
+			panel.add(lblBackwood_1);
+			
+			JLabel lblTopwood_1 = new JLabel("TopWood");
+			lblTopwood_1.setBounds(52, 300, 57, 15);
+			panel.add(lblTopwood_1);
+			
+			
+			panel.setVisible(false);
 			panel_1.add(ifYesGuitar);
 			ifYesGuitar.setBackground(Color.ORANGE);
 			ifYesGuitar.setLayout(null);
@@ -100,6 +257,26 @@ public class FindGuitarTester extends JFrame {
 			lblNewLabel_4.setIcon(new ImageIcon(FindGuitarTester.class.getResource("/res/yes.png")));
 			lblNewLabel_4.setBounds(12, 37, 247, 364);
 			ifYesGuitar.add(lblNewLabel_4);
+			
+			table_1 = new JTable();
+			table_1.setBackground(Color.WHITE);
+			table_1.setModel(new DefaultTableModel(
+				new Object[][] {
+					{null, null, null, null, null, null},
+				},
+				new String[] {
+					"Builder", "Model", "Type", "BackWood", "TopWood", "Price"
+				}
+			));
+			table_1.setBounds(258, 204, 96, -109);
+			ifYesGuitar.add(table_1);
+			
+			
+			
+			
+			
+			
+			
 			panel_1.add(ifNoGuitar);
 			ifNoGuitar.setBackground(Color.PINK);
 			ifNoGuitar.setLayout(null);
@@ -228,20 +405,28 @@ public class FindGuitarTester extends JFrame {
 					
 					costumerLikes.setModel(modelText.getText());
 					List matchingGuitars = inventory.search(costumerLikes);
-				
+					
+					
+					
 					if (!matchingGuitars.isEmpty()) {
-					System.out.println("Erin, you might like these guitars:");
+					
+					int count = 0;	
 					for (Iterator i = matchingGuitars.iterator(); i.hasNext();){
 					Guitar guitar = (Guitar)i.next();
 					GuitarSpec spec = guitar.getSpec();
-						        System.out.println("  We have a " +
-						          spec.getBuilder() + " " + spec.getModel() + " " +
-						          spec.getType() + " guitar:\n     " +
-						          spec.getBackWood() + " back and sides,\n     " +
-						          spec.getTopWood() + " top.\n  You can have it for only $" +
-						          guitar.getPrice() + "!\n  ----");
-						      }
-						    } else {
+					JLabel lblNewLabel_5 = new JLabel();
+					lblNewLabel_5.setText("<html><p style=\"width:200px\">"+"  We have a " +
+					          spec.getBuilder() + " " + spec.getModel() + " " +
+					          spec.getType() + " guitar:\n     " +
+					          spec.getBackWood() + " back and sides,\n     " +
+					          spec.getTopWood() + " top.\n  You can have it for only $" +
+					          guitar.getPrice() + "!\n  ----"+"</p></html>"); 
+					lblNewLabel_5.setBounds(300, 0+count*60, 570, 500);
+					System.out.println(count);
+					ifYesGuitar.add(lblNewLabel_5);
+					count++;
+					}
+						    }else {
 						      ifNoGuitar.setVisible(true);
 //						      searchBtn.setVisible(false);
 						    }
@@ -252,21 +437,23 @@ public class FindGuitarTester extends JFrame {
 			
 			panel_1.add(searchBtn);
 			panel_1.setVisible(false);
-			contentPane.add(panel);
 			
-			JButton viewAllbtn = new JButton("View all instrument");
-			viewAllbtn.setBounds(292, 176, 148, 43);
-			contentPane.add(viewAllbtn);
+			JButton addOrDelete = new JButton("Add or Delete");
+			addOrDelete.setBounds(292, 176, 148, 43);
+			contentPane.add(addOrDelete);
 			
 			JButton btnNewButton_1 = new JButton("Search instrument");
 			btnNewButton_1.setBounds(292, 243, 148, 43);
 			contentPane.add(btnNewButton_1);
 			
-			viewAllbtn.addActionListener(new ActionListener() {
+			addOrDelete.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					panel_1.setVisible(true);
 					panel.setVisible(true);
-					viewAllbtn.setVisible(false);
+					
+					addOrDelete.setVisible(false);
 					btnNewButton_1.setVisible(false);
+					modelText.setVisible(false);
 					
 				}
 			});
@@ -274,7 +461,7 @@ public class FindGuitarTester extends JFrame {
 			btnNewButton_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					panel_1.setVisible(true);
-					viewAllbtn.setVisible(false);
+					addOrDelete.setVisible(false);
 					btnNewButton_1.setVisible(false);
 				}
 			});
