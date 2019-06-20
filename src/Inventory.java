@@ -12,7 +12,7 @@ public class Inventory {
   private Connection conn;
   private Statement stmt;
   private ResultSet rs;
-
+  List matchingGuitars = new LinkedList();
   public Inventory() {
 	  try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -56,7 +56,7 @@ public class Inventory {
   
  
   public List search(GuitarSpec searchSpec) {
-    List matchingGuitars = new LinkedList();
+    //List matchingGuitars = new LinkedList();
 
       try {
     	  String sql;

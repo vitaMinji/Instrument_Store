@@ -37,8 +37,10 @@ public class FindGuitarTester extends JFrame {
 		private JTextField priceText;
 
 		public static void main(String[] args) {
-		inventory.addGuitar("delete from guitar");
-		initializeInventory(inventory);
+			
+			inventory.addGuitar("delete from guitar");
+			initializeInventory(inventory);
+			
 		}
 			
 		private static void initializeInventory(Inventory inventory) {
@@ -169,7 +171,6 @@ public class FindGuitarTester extends JFrame {
 			
 			builderComboBox.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
-					//model 초기화
 					adminLikes.setBuilder((Builder) builderComboBox.getSelectedItem());
 				}
 			});
@@ -199,7 +200,6 @@ public class FindGuitarTester extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					
 					adminLikes.setModel(textField_1.getText());
-//					//("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('11277', '3999.95', 'COLLINGS','CJ','ELECTRIC','6','INDIAN_ROSEWOOD','SITKA');")
 					String sql = "insert into guitar  (serialNumber, price, builder, model, type, numString, backWood, topWood) values('" + serialNumberText.getText()+"','"+Integer.parseInt(priceText.getText())+
 							"','"+ adminLikes.getBuilder()+"','"+ adminLikes.getModel()+"','"+adminLikes.getType()+"','"+adminLikes.getNumStrings()+"','"+adminLikes.getBackWood()+"','"+adminLikes.getTopWood()+"')";
 					inventory.addGuitar(sql);
@@ -328,7 +328,6 @@ public class FindGuitarTester extends JFrame {
 		
 			builderJCB.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
-					//model 초기화
 					costumerLikes.setBuilder((Builder) builderJCB.getSelectedItem());
 				}
 			});
@@ -376,7 +375,6 @@ public class FindGuitarTester extends JFrame {
 			backWoodJCB.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					costumerLikes.setBackWood((Wood)backWoodJCB.getSelectedItem());
-					//search 메소드에 바로 보내버리자.
 				}
 			});
 			backWoodJCB.setBounds(218, 235, 101, 21);
@@ -388,8 +386,6 @@ public class FindGuitarTester extends JFrame {
 			topWoodJCB.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e) {
 					costumerLikes.setTopWood((Wood)topWoodJCB.getSelectedItem());
-					//search 메소드에 바로 보내버리자.
-					
 				}
 			});
 			topWoodJCB.setBounds(218, 273, 101, 21);
