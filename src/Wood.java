@@ -21,6 +21,9 @@ public enum Wood {
   
   static private String tempText;
   
+//db 에서 넘어온 값을 사용하기 위함
+//string-->enum
+  
   public static Wood toEnum(String text) {
       for (Wood b : Wood.values()) {
     	  tempText=b.toString();

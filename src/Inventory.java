@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Inventory {
   
-  //추가한것
+  //DB 연결
   private Connection conn;
   private Statement stmt;
   private ResultSet rs;
@@ -38,10 +38,12 @@ public class Inventory {
 		}
   }
   
+  
+  //delete를 시행하기 위한 search
+  //이 때는 serial Number 와 price 만 있어도 되기 때문
   public void deleteSearch(String serialNumber, int price) {
 	  
 	  try {
-		  
 		  String sql;
 		  sql = " delete from guitar WHERE serialNumber = '" + serialNumber +"' AND price = '"+ price +"'";
 		  
@@ -58,7 +60,8 @@ public class Inventory {
 
       try {
     	  String sql;
-    	  //ELECTRIC이 문제임 왜지
+    	  
+    	  
     	
     	  sql = "SELECT * FROM guitar WHERE builder = '" + searchSpec.getBuilder() + "'  AND type ='" +  searchSpec.getType()+"'AND model ='" + searchSpec.getModel() 
     	  		+"'  AND type ='" +  searchSpec.getType() + "' AND numString ='" +  searchSpec.getNumStrings() + "' AND backWood ='" +  searchSpec.getBackWood()
@@ -69,8 +72,10 @@ public class Inventory {
 
 
     	  while(rs.next()) {
+    		  //rs 쌍으로 넘어오는 값을 enum 형으로 바꿔줌
     		  Wood tempBackWood=null;
     		  tempBackWood = tempBackWood.toEnum(rs.getString("backWood"));
+    		  
     		  Wood tempTopWood=null;
     		  tempTopWood = tempTopWood.toEnum(rs.getString("topWood"));
     		  

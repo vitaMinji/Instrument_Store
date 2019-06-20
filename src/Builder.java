@@ -17,7 +17,11 @@ public enum Builder {
   
   static private String tempText;
   
+  
+  //db 에서 넘어온 값을 사용하기 위함
+  //string-->enum
   public static Builder toEnum(String text) {
+	  
       for (Builder b : Builder.values()) {
     	  tempText=b.toString();
           if (b.tempText.equalsIgnoreCase(text)) {

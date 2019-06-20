@@ -197,12 +197,12 @@ public class FindGuitarTester extends JFrame {
 			JButton addGuitarBtn = new JButton("Add Guitar");
 			addGuitarBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 					adminLikes.setModel(textField_1.getText());
-					System.out.println(builderComboBox.getSelectedItem().toString());
 //					//("insert into guitar (serialNumber, price, builder, model, type, numString, backWood, topWood) values('11277', '3999.95', 'COLLINGS','CJ','ELECTRIC','6','INDIAN_ROSEWOOD','SITKA');")
-//					String sql = "insert into guitar  (serialNumber, price, builder, model, type, numString, backWood, topWood) values('" + serialNumberText.getText()+"','"+Integer.parseInt(priceText.getText())+
-//							"','"+ builderComboBox.getSelectedItem()+"','"+;
-//					inventory.addGuitar(sql);
+					String sql = "insert into guitar  (serialNumber, price, builder, model, type, numString, backWood, topWood) values('" + serialNumberText.getText()+"','"+Integer.parseInt(priceText.getText())+
+							"','"+ adminLikes.getBuilder()+"','"+ adminLikes.getModel()+"','"+adminLikes.getType()+"','"+adminLikes.getNumStrings()+"','"+adminLikes.getBackWood()+"','"+adminLikes.getTopWood()+"')";
+					inventory.addGuitar(sql);
 				}
 			});
 			
@@ -280,6 +280,7 @@ public class FindGuitarTester extends JFrame {
 			panel_1.add(ifNoGuitar);
 			ifNoGuitar.setBackground(Color.PINK);
 			ifNoGuitar.setLayout(null);
+		
 			
 			JLabel lblNewLabel_2 = new JLabel("Sorry! we don't have nothing for you");
 			lblNewLabel_2.setIcon(new ImageIcon(FindGuitarTester.class.getResource("/res/sorry.png")));
@@ -410,21 +411,25 @@ public class FindGuitarTester extends JFrame {
 					
 					if (!matchingGuitars.isEmpty()) {
 					
-					int count = 0;	
-					for (Iterator i = matchingGuitars.iterator(); i.hasNext();){
-					Guitar guitar = (Guitar)i.next();
-					GuitarSpec spec = guitar.getSpec();
-					JLabel lblNewLabel_5 = new JLabel();
-					lblNewLabel_5.setText("<html><p style=\"width:200px\">"+"  We have a " +
+						ifYesGuitar.setVisible(true);
+						int count = 0;	
+						for (Iterator i = matchingGuitars.iterator(); i.hasNext();){
+							Guitar guitar = (Guitar)i.next();
+							GuitarSpec spec = guitar.getSpec();
+							JLabel lblNewLabel_5 = new JLabel();
+							lblNewLabel_5.setText("<html><p style=\"width:200px\">"+"  We have a " +
 					          spec.getBuilder() + " " + spec.getModel() + " " +
 					          spec.getType() + " guitar:\n     " +
 					          spec.getBackWood() + " back and sides,\n     " +
 					          spec.getTopWood() + " top.\n  You can have it for only $" +
-					          guitar.getPrice() + "!\n  ----"+"</p></html>"); 
-					lblNewLabel_5.setBounds(300, 0+count*60, 570, 500);
-					System.out.println(count);
-					ifYesGuitar.add(lblNewLabel_5);
-					count++;
+					          guitar.getPrice() + "!\n "+"</p></html>"); 
+							lblNewLabel_5.setBounds(300, -20+count*60, 570, 500);
+							
+							ifYesGuitar.add(lblNewLabel_5);
+							count++;
+						searchBtn.setVisible(false);
+							
+							
 					}
 						    }else {
 						      ifNoGuitar.setVisible(true);
